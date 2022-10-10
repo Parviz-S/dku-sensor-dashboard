@@ -4,10 +4,22 @@
 import dash
 import pandas as pd
 import plotly.express as px
+import numpy as np
 from dash import dcc, html
 from dash_iconify import DashIconify
 
 external_script = ["https://tailwindcss.com/", {"src": "https://cdn.tailwindcss.com"}]
+
+sample_data = pd.read_csv("sample_data.csv")
+sample_data.drop('Unnamed: 0', inplace=True, axis=1)
+sample_data['epoch'] = pd.to_datetime(sample_data['epoch'], unit='ms')
+print(sample_data)
+
+# data = pd.DataFrame(data)
+# print(data)
+# data = data[[0, 3, 6, 9]]
+# data = data.rename(columns={0: 'epoch', 3: 'x', 6: 'y', 9: 'z'})
+
 
 app = dash.Dash(
     __name__,
@@ -29,7 +41,9 @@ avr_speed = int(df.Speed.sum() / sensor_count)
 active_sensors = 4
 inactive_sensors = 2
 
-fig = px.bar(df, x="Sensor", y="Speed", )
+# fig = px.bar(df, x="Sensor", y="Speed", )
+fig = px.line(sample_data, x="epoch", y=["x", "y", "z"], title="Selected: Sensor 1 (active)")
+fig_extra = px.line(sample_data, x="epoch", y=["x", "y", "z"], title="Sensor # (active/inactive)")
 
 
 def generate_infocard(text, data, change):
@@ -56,6 +70,7 @@ def generate_infocard(text, data, change):
         ],
         className=f"flex flex-1 p-[10px] h-[120px] justify-between shadow-lg rounded-lg",
     )
+
 
 
 app.layout = html.Div(
@@ -118,19 +133,65 @@ app.layout = html.Div(
                     children=[
                         html.Div(
                             children=[
+                                html.Div("Map of the Sensors", className="text-lg mb-[10px] mt-[10px] text-center"),
                                 html.Img(src="../assets/gym_photo.png", alt="gym photo"),
-                                html.Div()
                             ],
-                            className="bg-white",
+                            className="bg-white w-full shadow-2xl rounded-sm",
                         ),
                         html.Div(
                             children=[
-                                dcc.Graph(id="example-graph2", figure=fig),
+                                dcc.Graph(id="selected_graph", figure=fig),
                             ],
                             className="w-full shadow-2xl rounded-sm",
                         ),
                     ],
-                    className="grid grid-cols-1 lg:grid-cols-2 gap-4",
+                    className="grid grid-cols-1 lg:grid-cols-2 gap-4 ml-[1%] mr-[1%]",
+                ),
+                html.Div(
+                    children=[
+                        html.Div(
+                            children=[
+                                dcc.Graph(id="example_graph1", figure=fig_extra),
+                            ],
+                            className="w-full shadow-2xl rounded-lg",
+                        ),
+                        html.Div(
+                            children=[
+                                dcc.Graph(id="example_graph2", figure=fig_extra),
+                            ],
+                            className="w-full shadow-2xl rounded-lg",
+                        ),
+                        html.Div(
+                            children=[
+                                dcc.Graph(id="example_graph3", figure=fig_extra),
+                            ],
+                            className="w-full shadow-2xl rounded-lg",
+                        ),
+                    ],
+                    className="grid grid-cols-1 lg:grid-cols-3 gap-4 ml-[1%] mr-[1%] mt-[15px]",
+                ),
+                html.Div(
+                    children=[
+                        html.Div(
+                            children=[
+                                dcc.Graph(id="example_graph4", figure=fig_extra),
+                            ],
+                            className="w-full shadow-2xl rounded-lg",
+                        ),
+                        html.Div(
+                            children=[
+                                dcc.Graph(id="example_graph5", figure=fig_extra),
+                            ],
+                            className="w-full shadow-2xl rounded-lg",
+                        ),
+                        html.Div(
+                            children=[
+                                dcc.Graph(id="example_graph6", figure=fig_extra),
+                            ],
+                            className="w-full shadow-2xl rounded-lg",
+                        ),
+                    ],
+                    className="grid grid-cols-1 lg:grid-cols-3 gap-4 ml-[1%] mr-[1%] mt-[15px]",
                 ),
             ],
             className="bg-white basis-5/6",
@@ -138,6 +199,5 @@ app.layout = html.Div(
     ],
     className="flex",
 )
-
 if __name__ == "__main__":
     app.run_server(debug=True)
