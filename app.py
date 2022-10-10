@@ -72,35 +72,37 @@ def generate_infocard(text, data, change):
     )
 
 
-
 app.layout = html.Div(
     children=[
         html.Div(
             children=[
                 html.Div(
                     children=[html.Span(children="Smart Sensor Dashboard",
-                                        className="logo font-[20px] font-bold text-[#6439ff]")],
+                                        className="logo font-[20px] font-bold text-blue-700")],
                     className="top h-[50px] flex items-center justify-center"
                 ),
                 html.Hr(className="h-[0px] border-[0.5px] border-[lightgray]"),
-                html.Div(
-                    children=html.Ul(children=[
-                        html.Li(children=[
-                            html.Span(children="Sensors"),
-                        ]),
-                        html.Li(children=[
-                            html.Span(children="Sensors"),
-                        ]),
-                        html.Li(children=[
-                            html.Span(children="Sensors"),
-                        ]),
-                    ]),
-                    className="center pl-10"
-                ),
-                html.Div(
-                    children="color options",
-                    className="bottom"
-                )
+                html.Div([
+                    html.A("Sensor 1", className="block py-2 px-4 w-full text-white bg-blue-700 rounded-t-lg border-b "
+                                                 "border-gray-200 cursor-pointer"),
+                    html.A("Sensor 2", className="block py-2 px-4 w-full border-b border-gray-200 cursor-pointer "
+                                                 "hover:bg-gray-100 hover:text-blue-700 focus:outline-none "
+                                                 "focus:ring-2 focus:ring-blue-700 focus:text-blue-700"),
+                    html.A("Sensor 3", className="block py-2 px-4 w-full border-b border-gray-200 cursor-pointer "
+                                                 "hover:bg-gray-100 hover:text-blue-700 focus:outline-none "
+                                                 "focus:ring-2 focus:ring-blue-700 focus:text-blue-700"),
+                    html.A("Sensor 4", className="block py-2 px-4 w-full border-b border-gray-200 cursor-pointer "
+                                                 "hover:bg-gray-100 hover:text-blue-700 focus:outline-none "
+                                                 "focus:ring-2 focus:ring-blue-700 focus:text-blue-700"),
+                    html.A("Sensor 5", className="block py-2 px-4 w-full border-b border-gray-200 cursor-pointer "
+                                                 "hover:bg-gray-100 hover:text-blue-700 focus:outline-none "
+                                                 "focus:ring-2 focus:ring-blue-700 focus:text-blue-700"),
+                    html.A("Sensor 6", className="block py-2 px-4 w-full rounded-b-lg cursor-pointer "
+                                                 "hover:bg-gray-100 hover:text-blue-700 focus:outline-none "
+                                                 "focus:ring-2 focus:ring-blue-700 focus:text-blue-700"),
+
+                ], className="ml-[5%] mt-[15px] w-[90%] justify-center text-sm font-medium text-gray-900 bg-white "
+                             "rounded-lg border border-gray-200"),
             ],
             className="sidebar bg-white basis-1/6 border-r-[0.5px] border-[lightgray] min-h-[100vh]"
         ),
@@ -110,9 +112,9 @@ app.layout = html.Div(
                     children=[
                         html.Div(
                             children=[
-                                html.Div("About", className="pl-2 pr-1"),
-                                html.Div("Team", className="pl-2 pr-1"),
-                                html.Div("Contact Us", className="pl-2 pr-1"),
+                                html.A("Project Site (CDL)", href="/", className="pl-2 pr-1"),
+                                html.A("Project Repo", href="https://github.com/Parviz-S/dku-sensor-dashboard",
+                                       className="pl-2 pr-1"),
                             ],
                             className="wrapper flex w-[100%] justify-end"
                         )
