@@ -13,7 +13,6 @@ external_script = ["https://tailwindcss.com/", {"src": "https://cdn.tailwindcss.
 sample_data = pd.read_csv("sample_data.csv")
 sample_data.drop('Unnamed: 0', inplace=True, axis=1)
 sample_data['epoch'] = pd.to_datetime(sample_data['epoch'], unit='ms')
-print(sample_data)
 
 # data = pd.DataFrame(data)
 # print(data)
@@ -112,7 +111,7 @@ app.layout = html.Div(
                     children=[
                         html.Div(
                             children=[
-                                html.A("Project Site (CDL)", href="/", className="pl-2 pr-1"),
+                                html.A("Project Site (CDL)", href="https://sites.duke.edu/dukecdl_internal/smart-sensors-dku/", className="pl-2 pr-1"),
                                 html.A("Project Repo", href="https://github.com/Parviz-S/dku-sensor-dashboard",
                                        className="pl-2 pr-1"),
                             ],
