@@ -2,7 +2,7 @@
 
 ## 1. Clone the project on your local machine
 
-`git clone https://github.com/mnielsen/neural-networks-and-deep-learning.git`
+`git clone https://github.com/Parviz-S/dku-sensor-dashboard`
 
 ## 2. cd to project folder and install all dependencies
 
