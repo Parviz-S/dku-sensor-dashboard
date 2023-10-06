@@ -2,10 +2,13 @@
 # visit http://127.0.0.1:8050/ in your web browser.
 
 import dash
-import pandas as pd
-import plotly.express as px
-import numpy as np
 from dash import dcc, html
+
+import pandas as pd
+import numpy as np
+
+import plotly.express as px
+
 from dash_iconify import DashIconify
 
 external_script = ["https://tailwindcss.com/", {"src": "https://cdn.tailwindcss.com"}]
@@ -14,20 +17,12 @@ sample_data = pd.read_csv("sample_data.csv")
 sample_data.drop('Unnamed: 0', inplace=True, axis=1)
 sample_data['epoch'] = pd.to_datetime(sample_data['epoch'], unit='ms')
 
-# data = pd.DataFrame(data)
-# print(data)
-# data = data[[0, 3, 6, 9]]
-# data = data.rename(columns={0: 'epoch', 3: 'x', 6: 'y', 9: 'z'})
-
-
 app = dash.Dash(
     __name__,
     external_scripts=external_script,
 )
 app.scripts.config.serve_locally = True
 
-# assume you have a "long-form" data frame
-# see https://plotly.com/python/px-arguments/ for more options
 df = pd.DataFrame(
     {
         "Sensor": ["001", "002", "003", "004", "005", "006"],
@@ -40,7 +35,6 @@ avr_speed = int(df.Speed.sum() / sensor_count)
 active_sensors = 4
 inactive_sensors = 2
 
-# fig = px.bar(df, x="Sensor", y="Speed", )
 fig = px.line(sample_data, x="epoch", y=["x", "y", "z"], title="Selected: Sensor 1 (active)")
 fig_extra = px.line(sample_data, x="epoch", y=["x", "y", "z"], title="Sensor # (active/inactive)")
 
